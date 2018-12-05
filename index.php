@@ -155,17 +155,12 @@ img.icon {
 max-width:32px;
 max-height:32px;
 }
-/* Desktop and landscape tablets */
-.desktop-visible { display: none; }
-@media (min-width: 768px) {
-.desktop-visible { display: block; }
-}
 </style>
 </head>
 <!--frame_init will load the initial posts-->
 <body onload="frame_init();">
 <div class="layout">
-<div class="left_column desktop-visible">
+<div class="left_column">
 <div id="left_column_top">
 <?php 
 echoAbout();

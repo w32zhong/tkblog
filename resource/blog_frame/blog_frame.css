@@ -124,17 +124,31 @@ span.waterFallColumn {
 display:inline-block;
 vertical-align:top;
 }
-div.left_column {
-float:left;
-width:310px;
-}
-div.right_column {
-float:right;
-width:920px;
-}
-div.layout {
-margin:0px auto;
-width:1240px;
+/* Layout */
+  div.layout {
+  margin:0px auto;
+  }
+/* (1) Mobile */
+  div.left_column {
+    display: none
+  }
+  div.right_column {
+    width:920px;
+  }
+/* (2) Desktop and landscape tablets */
+@media (min-width: 768px) {
+  div.left_column {
+  float:left;
+  width:310px;
+  }
+  div.right_column {
+  float:right;
+  width:920px;
+  }
+  div.layout {
+  margin:0px auto;
+  width:1240px;
+  }
 }
 div.column_top_title {
 width:230px;
