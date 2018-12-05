@@ -130,7 +130,7 @@ vertical-align:top;
   }
 /* (1) Mobile */
   div.left_column {
-    display: none
+    display: none;
   }
   div.right_column {
     width:920px;
@@ -140,6 +140,7 @@ vertical-align:top;
   div.left_column {
   float:left;
   width:310px;
+  display: block;
   }
   div.right_column {
   float:right;
