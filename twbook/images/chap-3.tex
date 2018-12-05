@@ -1,0 +1,161 @@
+\chapter{Implementation and Evaluation}
+Based on the method we propose, we have implemented a search engine as well as a crawler and a parser for \LaTeX\ content. Also, a demo~\footnote{demo page: \url{http://infolab.ece.udel.edu:8912/cowpie/}} with Web interface is available for demonstration. 
+In this chapter, we will introduce the way we implement our proposed method and use this system to evaluate its effectiveness and efficiency.
+
+\section{System Overview}
+Our system is consisted of a crawler, a parser, a search program back-end and a web front-end. The crawler searches and extracts math mode \LaTeX\ from Website that directly returns \LaTeX\ markup (e.g. from math content websites using client-side rendering, e.g. MathJax). 
+Nowadays many websites are using MathJax to represent their mathematical content, the \LaTeX\ markup can be directed extracted because the \LaTeX\ markup will not be converted into browser-friendly MathML MathJax is a client . 
+
+\section{Implementation}
+The outline of our system process is, crawl and parse \LaTeX\ content, and transform math expressions into an in-memory tree structure, then write the leaf-root path labels along with degree number associated with each nodes (we call \textit{branch word}) to disk as our index. 
+The search engine search and score the similar expressions in index, and output the results. 
+We have a search program which outputs results in standard out device, and a WEB front-end which outputs results in HTML pages.
+
+\subsection{Crawler}
+\subsection{Parser}
+
+Because we are parsing \LaTeX\ directly, while most researches evaluate using MathML/XML format collection, 
+and original \LaTeX\ information is not always preserved in the dataset converted from \textit{LaTeXML}, 
+we have tried to convert MathML/XML dataset back to \LaTeX\ using \textit{pandoc}, but failed to convert all the document correctly. 
+Nevertheless, we have crawled \textit{Mathjax} content (in \LaTeX) from nearly all the posts from Math Stack Exchange website before March 2015 (over 60MB \textit{bzip2} compressed raw data in text files with one \LaTeX\ formula per line) and choose to use our own dataset~\footnote{data set can be downloaded from \url{http://infolab.ece.udel.edu:8912/cowpie/math-stack-exchange-march-2015.tar.bz2}} to evaluate the data.
+Our test query set consists queries mostly from NTCIR-10 Math Formula Search~\cite{ntcirtopic} and \cite{symbolpairs15}, some of them we are not able to find similar formula in our own dataset, are excluded from our test query set.
+Table~\ref{TestQ} shows our complete test queries used in our evaluation. 
+
+\begin{table}
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{|c|c||c|c|}\hline
+ID & formula & ID & formula \\ \thickhline
+1 & 
+$\int_0^\infty dx \int_{x}^\infty F(x,y)dy  =\int_0^\infty dy \int_{0}^y F(x,y)dx$ &
+2 & 
+$X(i\omega)$ \\\hline
+
+3 & 
+$x^n + y^n=z^n$ &
+4 & 
+$\int^{\infty}_{-\infty} e^{-x^2} dx$ \\\hline
+
+5 & 
+$\frac{f(x+h)-f(x)}{h}$ &
+6 & 
+$\frac {\sin x} x$ \\\hline
+
+7 & 
+$ax^2 + bx +c$ &
+8 & 
+$\frac {e^x + y}{z}$ \\\hline
+
+7 & 
+$O(n \log n)$ &
+8 & 
+$H^n(X) = Z^n (X) / B^n(X)$ \\\hline
+
+9 & 
+$A_n = \frac 1 \pi \int_{-\pi}^\pi F(x) \cos(nx) dx$ &
+10 & 
+$\lim_{x \to \infty} (1 + \dfrac 1x)^x$ \\\hline
+
+11 & 
+$f(x) = f(0) + f'(0)x + \frac{f''(0)}{2!} x^2 + \ldots$ &
+12 & 
+$f(a) = \frac 1 {2 \pi i} \oint_r \frac{f(z)}{z-a} \;\mathrm{d}z$ \\\hline
+
+13 & 
+$x^2 + 2xy + y^2 = |x|^2 + 2|x||y| + |y| ^2$ &
+14 & 
+$\int_a^b f(x) \;\mathrm{d}x = F(b) - F(a)$ \\\hline
+
+15 & 
+$\frac {n!}{r_1! \cdot r_2! \cdots r_k!}$ &
+16 & 
+$-b \pm \sqrt{b^2 - 4ac}$ \\\hline
+
+17 & 
+$1+\tan^2 \theta = \sec^2 \theta$ &
+18 & 
+$\bar{u} = (x,y,z)$ \\\hline
+
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+\end{center}
+\caption{Test query set}\label{TestQ}
+\end{table}
+
+There are four levels of relevance scored from 0 to 4 in our evaluation.
+The criteria considers both structural similarity and symbolic similarity. 
+Structural similarity is measured by 0, 1 (mostly similar) and 2 (complete matching). 
+While symbolic similarity is measured by 0, 1 (mostly similar for the matching parts) and 2 (identical symbols for the matching parts).
+The level of relevance is simply the sum of the two scores.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c"c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{Query ID} & \multicolumn{5}{c|}{Relevance Score} & \multirow{2}{*}{Total judged} \\
+\cline{2-6}
+& 0 & 1 & 2 & 3 & 4 &   \\ \thickhline
+1  &  15 &  2 &  2 &  0 &  1 &  20\\
+2  &  19 &  0 &  0 &  0 &  0 &  19\\
+3  &  15 &  4 &  1 &  0 &  0 &  20\\
+4  &  0 &  0 &  0 &  6 &  14 &  20\\
+5  &  0 &  0 &  0 &  8 &  12 &  20\\
+6  &  0 &  2 &  5 &  2 &  10 &  19\\
+7  &  1 &  4 &  3 &  3 &  9 &  20\\
+8  &  5 &  1 &  1 &  1 &  0 &  8\\
+9  &  0 &  0 &  4 &  11 &  5 &  20\\
+10  &  0 &  0 &  1 &  16 &  3 &  20\\
+11  &  0 &  0 &  0 &  1 &  6 &  7\\
+12  &  0 &  0 &  4 &  13 &  3 &  20\\
+13  &  14 &  3 &  1 &  1 &  1 &  20\\
+14  &  0 &  2 &  5 &  8 &  5 &  20\\
+15  &  0 &  0 &  0 &  15 &  5 &  20\\
+16  &  8 &  6 &  2 &  2 &  2 &  20\\
+17  &  0 &  0 &  5 &  13 &  2 &  20\\
+18  &  19 &  1 &  0 &  0 &  0 &  20\\ \hline
+\end{tabular}
+\end{center}
+
+\caption{Query statistics for matching structurally only}
+\label{query_stat_for_struct}
+\end{table}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c"c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{Query ID} & \multicolumn{5}{c|}{Relevance Score} & \multirow{2}{*}{Total judged} \\
+\cline{2-6}
+& 0 & 1 & 2 & 3 & 4 &   \\ \thickhline
+1  &  13 &  2 &  2 &  1 &  1 &  19\\
+2  &  15 &  1 &  0 &  3 &  1 &  20\\
+3  &  0 &  0 &  0 &  0 &  20 &  20\\
+4  &  0 &  0 &  0 &  1 &  19 &  20\\
+5  &  0 &  0 &  0 &  0 &  20 &  20\\
+6  &  1 &  0 &  0 &  0 &  19 &  20\\
+7  &  0 &  0 &  0 &  0 &  20 &  20\\
+8  &  4 &  0 &  1 &  2 &  0 &  7\\
+9  &  0 &  2 &  5 &  8 &  5 &  20\\
+10  &  0 &  0 &  0 &  9 &  11 &  20\\
+11  &  0 &  0 &  0 &  2 &  5 &  7\\
+12  &  0 &  0 &  12 &  3 &  5 &  20\\
+13  &  15 &  1 &  2 &  1 &  1 &  20\\
+14  &  0 &  0 &  0 &  0 &  20 &  20\\
+15  &  0 &  0 &  0 &  13 &  6 &  19\\
+16  &  0 &  0 &  2 &  0 &  18 &  20\\
+17  &  0 &  0 &  0 &  0 &  20 &  20\\
+18  &  0 &  0 &  2 &  7 &  11 &  20\\ \hline
+\end{tabular}
+\end{center}
+
+\caption{Query statistics for matching structurally with symbolic scoring}\label{query_stat_for_both}
+\end{table}
+
+We have evaluated two methods in this paper, the first one is a boolean search for only structurally similar document expressions to the query.
+That is to say, every documents formula tree $T_d \in \bigcap_{a \in L} \mathcal{I}_{\Pi}(a) $ is a hit, and only the first $k$ hits are returned as search results where $k$ is the maximum ranking items.
+Table~\ref{query_stat_for_struct} shows the distribution of hits and relevance level for each test query using this method.
+Another method we have evaluated, further applies mark-and-cross algorithm to score every formula tree in document expressions that structurally match the query. 
+It uses a min-heap data structure that keeps replacing the minimal-score item in current ranking list with new one if the latter has a higher symbolic similarity score, 
+which will give us top $k$ highest-score hits with most symbolic similarity in our search result. 
+Table~\ref{query_stat_for_both} gives the distribution and relevance scores for this method.
+Both of the two method does not guarantee a thorough search through index (even if we are pruning and search only a set of the index), in fact, we set a limit (around 3,650,000) to the maximum items to be scanned in our index, to make our search response time practical for a real search engine.

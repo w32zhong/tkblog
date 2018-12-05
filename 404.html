@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>404 Dude!</title>
+<!-- For 404 page, resources should be absolute paths, since URL can be from anywhere -->
+<script src="/tkblog/plugin/vuejs/vue.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<h1>404</h1>
+<h3>There is nothing to show here. -_-!</h3>
+<p id="vue-app">
+You will be redirected to index page in {{n}} second(s)...
+</p>
+
+<script language="JavaScript">
+var waitsec = 5;
+var mydata = { n: waitsec }
+
+new Vue({
+	el: '#vue-app',
+	data: mydata
+});
+
+function redirect()
+{
+	window.location.href = "redirect.dummy";
+}
+
+setInterval(function() {
+	if (mydata.n > 0)
+		mydata.n -= 1
+	},
+1000);
+
+setTimeout(redirect, (waitsec - 1) * 1000);
+
+</script>
+</body>
+</html>

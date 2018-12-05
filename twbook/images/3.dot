@@ -1,0 +1,108 @@
+graph {
+    label="\n\n Problem 3"
+ 
+	{ node[shape="record"]
+	raw_material 
+	[label=<{raw_material|<u>ID</u><br/>unit_of_measure<br/>name<br/>cost<br/>}>]
+	vendor 
+	[label=<{vendor|<u>ID</u><br/>name<br/>address<br/>}>]
+	sales_territory  
+	[label=<{sales_territory|<u>ID</u><br/>name<br/>}>]
+	sales_people 
+	[label=<{sales_people|Tel<br/>Fax<br/>}>]
+	product 
+	[label=<{product|<u>ID</u><br/>description<br/>finish<br/>price<br/>}>]
+	customer  
+	[label=<{customer|<u>ID</u><br/>name<br/>address<br/>zip_code<br/>}>]
+	product_line  
+	[label=<{product_line|<u>ID</u><br/>name<br/>}>]
+	order  
+	[label=<{order|<u>ID</u><br/>data<br/>quantity<br/>}>]
+	work_center  
+	[label=<{work_center|<u>ID</u><br/>location<br/>}>]
+	employee  
+	[label=<{employee|<u>ID</u><br/>name<br/>address<br/>}>]
+	manager  
+	[label=<{manager|}>]
+	supervisor  
+	[label=<{supervisor|}>]
+	skill  
+	[label=<{skill|<u>name</u>}>]
+	}
+    { node[shape="diamond"]
+	supply
+	serve
+	business
+	assemble
+	produce
+	group
+	request
+	request_per_product_line
+	for
+	submit
+	work
+	have	
+	supervise
+	}
+    { node[shape="diamond", peripheries=2]
+	manager_who
+	supervisor_who
+	sales_people_who
+	}
+    { node[shape="box"]
+	unit_price
+	quantity
+	}
+ 
+	{ edge[dir=none]
+	order -- for
+	for -- product
+	order -- request
+	request -- customer
+	order -- request_per_product_line
+	customer -- request_per_product_line
+	product_line -- request_per_product_line
+	vendor -- supply
+	work -- work_center	
+	skill -- have
+	produce -- work_center
+	business -- customer
+	}
+	{ edge[dir=forward]
+	submit -- customer
+	sales_people_who -- employee
+	group -- product_line
+	supervise -- supervisor
+	supervisor_who -- employee
+	manager_who -- employee
+	}
+	{ edge[dir=forward, color="black:white:black"]
+	request_per_product_line -- product
+	serve -- sales_territory
+	}
+	{ edge[color="black:white:black"]
+	sales_people -- serve
+	sales_people -- sales_people_who
+	sales_territory -- business
+	order -- submit
+	request -- product
+	product -- group
+	product -- produce
+	work_center -- work
+	supervisor -- supervisor_who
+	employee -- supervise
+	employee -- have
+	manager -- manager_who
+	product -- assemble
+	assemble -- raw_material
+	raw_material -- supply
+	}
+	{ edge[style="dashed"]
+	unit_price -- supply
+	assemble -- quantity
+	}
+	{ edge[]
+	}
+	{ edge[style=invis]
+	}
+}

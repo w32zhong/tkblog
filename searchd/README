@@ -1,0 +1,4 @@
+1. pip3 install whoosh
+2. pip3 install jieba
+3. curl http://127.0.0.1/tkblog/panel_.php?init=srch
+4. ./respawn-on-crash.sh &

@@ -1,0 +1,22 @@
+div.load_button {
+background-color: #ce5353;
+text-align:center;
+margin:10px 10px 10px 10px;
+}
+div.load_button:hover {
+background-color:#eeeeee;
+}
+div.load_button a {
+text-decoration:none;
+font:bold 15px sans-serif; 
+display:block;
+}
+div.loadbutton_clicked {
+background-color:#eeeeee;
+text-align:center;
+margin:10px 10px 10px 10px;
+}
+div.loadbutton_clicked span {
+font:bold 15px sans-serif; 
+color:#eeb9b9;
+}

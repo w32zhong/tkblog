@@ -1,0 +1,7 @@
+blog/draft/
+searchd/__pycache__/
+searchd/index/
+searchd/conflicts.log
+music/
+feed.xml
+blog/

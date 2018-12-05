@@ -1,0 +1,22 @@
+.mysearch input[type="text"] {
+padding-left:10px;
+width: 150px;
+height: 20px;
+vertical-align: bottom;/*add vertical align bottom*/
+border: 0;
+outline: 0;
+background: transparent;
+border-bottom: 1px solid #B62828
+}
+.mysearch button[type="submit"] {
+background: url(../../plugin/glyphicons_free/glyphicons/png/glyphicons-28-search.png) 1px 1px no-repeat;
+width: 25px;
+height: 25px;
+border: 0;
+cursor: pointer;
+right: 20px;
+position:relative;
+}
+.mysearch input[type="submit"], button[type="text"] {
+line-height: normal !important;
+}

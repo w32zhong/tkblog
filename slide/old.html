@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>Presentation</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" media="screen" href="core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" media="screen" href="extensions/goto/deck.goto.css">
+  <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+  <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
+  <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/style/swiss.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
+
+  <!-- Basic black and white print styles -->
+  <link rel="stylesheet" media="print" href="core/print.css">
+
+  <!-- Required Modernizr file -->
+  <script src="modernizr.custom.js"></script>
+
+<!--syntaxhighlighter-->
+<link type="text/css" rel="stylesheet" href="../plugin/syntaxhighlighter/styles/shCore.css"></link>
+<link type="text/css" rel="stylesheet" href="../plugin/syntaxhighlighter/styles/shThemeDefault.css"></link>
+<link type="text/css" rel="stylesheet" href="../plugin/syntaxhighlighter/styles/shCoreDefault.css"></link>
+<script language="javascript" src="../plugin/syntaxhighlighter/scripts/shCore.js"></script>
+<script language="javascript" src="../plugin/syntaxhighlighter/scripts/shBrushCpp.js"></script>
+<script language="javascript" src="../plugin/syntaxhighlighter/scripts/shBrushPlain.js"></script>
+
+<!--mathjax-->
+<script type="text/javascript" 
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+        tex2jax: {
+                inlineMath: [['[imath]','[/imath]']],
+                displayMath: [['[dmath]','[/dmath]']]
+        },
+});
+</script>
+<script type="text/javascript">
+SyntaxHighlighter.all()
+</script>
+
+<style type="text/css">
+.slide .highlight {color: red;}
+.slide span.h { 
+	background-color: #6565CC; 
+	color:black; 
+	border-radius:50%;
+}
+.slide span.n { 
+	background-color: #FF7B59; 
+	color:black; 
+	border-radius:50%;
+}
+</style>
+
+</head>
+<body>
+<div class="deck-container">
+	<section class="slide">
+	<div class="vcenter">
+		<h2>CPEG 657</h2>
+		</br>
+		<h3>Project Final Presentation</h3>
+		</br>
+		</br>
+		<p>Benhang Fan, Wanzhu Chen, Wei Zhong</p>
+	</div>
+	</section>
+	
+	<section class="slide">
+	<h2>the problem and the way we use...</h2>
+<ul>
+	<li class="slide">bag of words model or even N-gram models can be useless in math language</li>
+	<ul class="slide">
+		<li>[imath]ax + (b + c) \not= (a+b)x +c[/imath]</li>
+		<li>[imath]a^2+b^2=c^2[/imath] is also described as [imath]x^2+y^2=z^2[/imath]</li>
+	</ul>
+	<li class="slide">but to really vaule the similarity of math formula...</li>
+	<ul class="slide">
+		<li>parse the language we choose to describe query/document:<br/> math related subset of (La)Tex: <span class="highlight">Flex/Bison</span></li>
+		<li>construct the tree: <span class="highlight">programing laguage C</span></li>
+		<li>compare two trees in a reasonable and efficient way: what we call "<span class="highlight">branch word</span>"</li>
+		<li>the way to store data in a file to reflect the tree: <span class="highlight">file system is enough</span></li>
+	</ul>
+</ul>
+	</section>
+
+	<section class="slide">
+<h2>tokenization using flex</h2>
+<pre class="brush: c">
+"!"             { return yytext[0]; }
+"+"|"-"|"_"|"^" { return yytext[0]; }
+"("|"\\{"       { return '('; }
+")"|"\\}"       { return ')'; }
+"|"|"\|"        { 
+                 int save = abs_toggle;
+                 abs_toggle = !abs_toggle;
+                 if (save)
+                 	return ABS_R; 
+                 else
+                 	return ABS_L; 
+                }
+
+\\neg           { return NEG; }
+
+=               { mkstr(yytext); return EQ_CLASS; }
+\\ge            { mkstr(yytext); return EQ_CLASS; }
+\\not("="|"\equiv"|"\in") { mkstr(yytext); return EQ_CLASS; }
+...
+\\sum           { mkstr(yytext); return SUM_CLASS; }
+\\int           { mkstr(yytext); return SUM_CLASS; }
+...
+\\times         { mkstr(yytext); return TIMES; }
+\\cdot          { mkstr(yytext); return TIMES; }
+
+\\frac          { mkstr(yytext); return FRAC; }
+\\dfrac         { mkstr(yytext); return FRAC; }
+
+\\sqrt          { mkstr(yytext); return SQRT; }
+
+\/              { mkstr(yytext); return DIV; }
+\\div           { mkstr(yytext); return DIV; }
+
+[a-zA-Z_]'*     { mkstr(yytext); return VAR; }
+[0-9]+\.?[0-9]* { mkstr(yytext); return VAR; } 
+\\[Tt]heta      { mkstr(yytext); return VAR; } 
+...
+
+[ \t]+          {}
+\\[a-zA-Z]+     {/* omit undefined control sequence */}
+.               {}
+%%
+
+</pre>
+	</section>
+	
+<section class="slide">
+<h2>syntax reduce using bison</h2>
+<pre class="brush: c">
+    0 $accept: doc $end
+
+    1 doc: %empty
+    2    | doc query
+
+    3 query: tex '\n'
+    4      | '\n'
+
+    5 tex: term
+    6    | tex '+' term
+    7    | tex '-' term
+    8    | '-' tex
+    9    | tex EQ_CLASS tex
+
+   10 term: factor
+   11     | term factor
+   12     | term TIMES factor
+   13     | term DIV factor
+
+   14 body: '{' tex '}'
+   15     | '(' tex ')'
+   16     | VAR
+
+   17 factor: body
+   18       | factor script
+   19       | ABS_L tex ABS_R
+   20       | FRAC '{' tex '}' '{' tex '}'
+   21       | SUM_CLASS body
+   22       | SUM_CLASS script body
+   23       | body '!'
+   24       | SQRT '[' tex ']' body
+   25       | SQRT body
+
+   26 script: '_' VAR
+   27       | '_' VAR '^' VAR
+   28       | '_' VAR '^' '{' tex '}'
+   29       | '^' VAR '_' '{' tex '}'
+   30       | '^' VAR
+   31       | '^' VAR '_' VAR
+   32       | '^' '{' tex '}'
+   33       | '^' '{' tex '}' '_' VAR
+   34       | '^' '{' tex '}' '_' '{' tex '}'
+   35       | '_' '{' tex '}'
+   36       | '_' '{' tex '}' '^' VAR
+   37       | '_' '{' tex '}' '^' '{' tex '}'
+</pre>
+</section>
+
+<section class="slide">
+<h2>an example</h2>
+<p>given math for formula in tex: </p>
+<pre>(a+\frac{b}{c})^n = d</pre>
+<p> which represents math formula:
+[dmath] (a+\frac{b}{c})^n = d [/dmath]
+which will take <span class="h">&nbsp;a </span>, <span class="h"> &nbsp;b </span>, <span class="h"> &nbsp;c </span>, <span class="h"> &nbsp;d </span>, <span class="h"> &nbsp;n </span>&nbsp;, <span class="n"> &nbsp;+ </span>, <span class="n"> &nbsp;/ </span>, <span class="n"> &nbsp;^ </span>&nbsp;, <span class="n"> &nbsp;= </span> as token, <br/>
+and construct a tree something like this:
+</p>
+<img src="img/tree.png"/>
+</section>
+
+<section class="slide">
+<h2>tree construction</h2>
+<h3>how nodes are attached when a grammar is reduced?</h3>
+<pre class="brush: c; highlight: [1]">
+6  tex: tex '+' term
+9  tex: tex EQ_CLASS tex
+13 term: term DIV factor
+18 factor: factor script
+</pre>
+<img src="img/attach.png"/>
+<pre class="brush: c">
+SUB_CONS(mktoken("+", MT_ADD), $1, $3);
+root = $$ = father;
+</pre>
+
+<h3>in some cases, one should pass its sons if two fathers are the same token:</h3>
+<img src="img/case.png"/>
+</section>
+
+<section class="slide">
+<h2>compare two trees: bottom to up</h2>
+<h3>use the same example here...</h3>
+<p>what we call <span class="highlight">branch word...</span><p>
+<img src="img/branch.png" />
+<span class="h"> &nbsp;b </span>
+<span class="n"> &nbsp;/ </span>
+<span class="n"> &nbsp;+ </span>
+<span class="n"> &nbsp;^ </span>
+<span class="n"> &nbsp;= </span>
+<p>in total, 5 branch words:</p><br/>
+<ol>
+<li>
+<span class="h"> &nbsp;b </span>
+<span class="n"> &nbsp;/ </span>
+<span class="n"> &nbsp;+ </span>
+<span class="n"> &nbsp;^ </span>
+<span class="n"> &nbsp;= </span>
+</li>
+<li>
+<span class="h"> &nbsp;d </span>
+<span class="n"> &nbsp;= </span>
+</li>
+<li>
+<span class="h"> &nbsp;a </span>
+<span class="n"> &nbsp;+ </span>
+<span class="n"> &nbsp;^ </span>
+<span class="n"> &nbsp;= </span>
+</li>
+<li>
+<span class="h"> &nbsp;c </span>
+<span class="n"> &nbsp;/ </span>
+<span class="n"> &nbsp;+ </span>
+<span class="n"> &nbsp;^ </span>
+<span class="n"> &nbsp;= </span>
+</li>
+<li>
+<span class="h"> &nbsp;n </span>
+<span class="n"> &nbsp;^ </span>
+<span class="n"> &nbsp;= </span>
+</li>
+</ol>
+<p>we will consider the order, but NOT distinguish the leaves' actual symbol.</p>
+</section>
+
+<section class="slide">
+<h2>token weight in the tree</h2>
+<p>we assign weights to each token in the tree to distinguish:</p>
+<p>[dmath](a+a+a)\times(a+a+a)[/dmath] from [dmath](a+a)\times(a+a+a+a)[/dmath]</p>
+<img src="img/same_br.png"/>
+<p>so the previous example branch word will have weight:</p>
+<span>
+<span class="h"> &nbsp;b</span> (w=1)
+<span class="n"> &nbsp;/ </span>(w=3) 
+<span class="n"> &nbsp;+ </span>(w=5)
+<span class="n"> &nbsp;^ </span>(w=7)
+<span class="n"> &nbsp;= </span>(w=9)
+</span>
+<p>the weight of node [imath]n_i[/imath] is the sum of that of its successors, which is given by:</p>
+<p>[dmath]w = |n_j| \qquad n_j \in \{n|succ(n_i) \cup n_i\}[/dmath]</p>
+</section>
+
+<section class="slide">
+<h2>store all the branch word</h2>
+<h3>the previous example again</h3>
+<span>
+<span class="h"> &nbsp;b</span> (w=1)
+<span class="n"> &nbsp;/ </span>(w=3) 
+<span class="n"> &nbsp;+ </span>(w=5)
+<span class="n"> &nbsp;^ </span>(w=7)
+<span class="n"> &nbsp;= </span>(w=9)
+</span>
+<p>store it in the directory: <span class="highlight">./collection/var/frac/add/sus/eq_class</span></p>
+<p>a posting file which records the weight of this branch:</p>
+<pre>1X1-3-5-7-9-</pre>
+<p>if there are 3 same branch words in one formula, it would be:</p>
+<pre>3X1-3-5-7-9-</pre>
+<p>the posting file will contain a "pointer" to the formula and its URL.</p>
+<p>so that when we search for a branch word
+<span class="h"> &nbsp;y </span>
+<span class="n"> &nbsp;/ </span>
+<span class="n"> &nbsp;+ </span>, 
+we will go into the directory: <span class="highlight">./collection/var/frac/add</span></p>
+<p>and search all the posting file under that directory recurisvely.</p>
+<br/>
+</section>
+	
+<section class="slide">
+<h2>score and ranking</h2>
+<p>given two branch word:</p>
+<pre>2X1-3-5-8-11-12-</pre>
+<p>and</p>
+<pre>3X1-3-5-7-9-</pre>
+<p>let [imath]m[/imath] be the number of continuous matches from the begining of the branch word, [imath]n[/imath] be number of same branch word, [imath]l[/imath] be the length of branch word, we have our score be:</p>
+<p>[dmath]
+\left\{ \begin{array}{l}
+s_{i,j} &= \min(n_i, n_j) \times \frac{m}{l_i} + \frac{1}{|n_i - n_j| + 1} \times \frac{m}{\max(l_i, l_j)} \\
+S &= \sum_{k \in T}{s^{k}_{i,j}}
+\end{array} \right.
+[/dmath]</p>
+</section>
+
+	<section class="slide">
+	<div class="vcenter">
+		<h3>Thank You!</h3>
+	</div>
+	</section>
+
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+      <span class="deck-status-current"></span>
+      /
+      <span class="deck-status-total"></span>
+    </p>
+
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+      <label for="goto-slide">Go to slide:</label>
+      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+      <datalist id="goto-datalist">1</datalist>
+      <input type="submit" value="Go">
+    </form>
+
+    <!-- End extension snippets. -->
+  </div>
+
+<!-- Required JS files. -->
+<script src="jquery.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/goto/deck.goto.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  $(function() {
+    $.deck('.slide');
+  });
+</script>
+</body>
+</html>

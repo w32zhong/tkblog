@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>Presentation</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" media="screen" href="core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" media="screen" href="extensions/goto/deck.goto.css">
+  <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+  <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
+  <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/style/swiss.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
+
+  <!-- Basic black and white print styles -->
+  <link rel="stylesheet" media="print" href="core/print.css">
+
+  <!-- Required Modernizr file -->
+  <script src="modernizr.custom.js"></script>
+
+<!--syntaxhighlighter-->
+<link type="text/css" rel="stylesheet" href="../plugin/syntaxhighlighter/styles/shCore.css"></link>
+<link type="text/css" rel="stylesheet" href="../plugin/syntaxhighlighter/styles/shThemeDefault.css"></link>
+<link type="text/css" rel="stylesheet" href="../plugin/syntaxhighlighter/styles/shCoreDefault.css"></link>
+<script language="javascript" src="../plugin/syntaxhighlighter/scripts/shCore.js"></script>
+<script language="javascript" src="../plugin/syntaxhighlighter/scripts/shBrushCpp.js"></script>
+<script language="javascript" src="../plugin/syntaxhighlighter/scripts/shBrushPlain.js"></script>
+
+<!--mathjax-->
+<script type="text/javascript" 
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+        tex2jax: {
+                inlineMath: [['[imath]','[/imath]']],
+                displayMath: [['[dmath]','[/dmath]']]
+        },
+});
+</script>
+<script type="text/javascript">
+SyntaxHighlighter.all()
+</script>
+
+<style type="text/css">
+.slide .highlight {color: red;}
+.slide span.h { 
+	background-color: #6565CC; 
+	color:black; 
+	border-radius:50%;
+}
+.slide span.n { 
+	background-color: #FF7B59; 
+	color:black; 
+	border-radius:50%;
+}
+strike {
+    text-decoration: none;
+    background-image: linear-gradient(transparent 14px,#cc1f1f 14px,#cc1f1f 18px,transparent 18px);
+}
+</style>
+
+</head>
+<body>
+<div class="deck-container">
+
+	<section class="slide">
+	<div class="vcenter">
+		<h2>Introduction to my project</h2>
+		</br>
+		<h3>A [imath]\LaTeX[/imath] math content search engine</h3>
+		</br>
+		</br>
+		<p>Zhong Wei</p>
+	</div>
+	</section>
+
+	<section class="slide">
+	<h2>Is the problem too Big?</h2>
+<ul>
+	<li>you are inventing a new thing</li>
+	<li>need a lot of work to build from ground up</li>
+	<li>a new model different from mainstream models</li>
+	<li>formula can have complex, various representation, matrix, hat, subscript...</li>
+	<li>ambiguity, parser needs to understand the math?</li>
+	<li>search efficiency</li>
+</ul>
+	</section>
+
+	<section class="slide">
+	<h2>Notable existing systems</h2>
+<ul>
+	<li>System using existing classical model (Integrate with Lucene)
+	<ul>
+		<li>Implemented by Integration with Lucene<ul>
+		<li>DLMF </li>
+		<li>MIaS </li>
+		<li>5exy </li>
+		</ul></li>
+		<li>EgoMath (boolean model approach)</li>
+		<li>WikiMirs (Similar idea to EgoMath)</li>
+	</ul>
+	</li>
+	<li>System using unification approach
+	<ul>
+		<li>MWS (using substitution tree indexing)</li>
+	</ul>
+	</li>
+	<li>Problem Solving System
+	<ul>
+		<li>Wolfram alpha</li>
+		<li>Symbol Lab</li>
+	</ul>
+	</li>
+</ul>
+	</section>
+	
+	<section class="slide">
+	<h2>Notable existing systems</h2>
+<ul>
+	<li>Close system
+	<ul>
+		<li>(uni)quation</li>
+		<li>Springer LaTeX search</li>
+	</ul>
+	</li>
+</ul>
+	<h4>Reference</h4>
+<a href="https://github.com/t-k-/math-se/blob/master/doc/5exy.pdf?raw=true" target="_blank">
+https://github.com/t-k-/math-se/blob/master/doc/5exy.pdf?raw=true
+</a><br />
+<a href="https://github.com/t-k-/math-se/blob/master/doc/EgoMath.pdf?raw=true" target="_blank">
+https://github.com/t-k-/math-se/blob/master/doc/EgoMath.pdf?raw=true
+</a><br />
+<a href="https://github.com/t-k-/math-se/blob/master/doc/term-indexing.ps?raw=true" target="_blank">
+https://github.com/t-k-/math-se/blob/master/doc/term-indexing.ps?raw=true
+</a><br />
+	</section>
+
+	<section class="slide">
+	<h2>Wolfram alpha</h2>
+	<iframe style="border-style: solid; border-width: 5px;" src="
+http://www.wolframalpha.com/examples/Math.html"
+	height="800" width="1000"></iframe>
+	</section>
+
+	<section class="slide">
+	<h2>Symbol Lab</h2>
+	<iframe style="border-style: solid; border-width: 5px;" src="
+http://www.symbolab.com/"
+	height="800" width="1000"></iframe>
+	</section>
+
+	<section class="slide">
+	<h2>Math Web Search engine (MWS)</h2>
+	<pre>\frac{?a^2 + ?b^2}{?a^2}</pre>
+	<iframe style="border-style: solid; border-width: 5px;" src="
+http://search.mathweb.org/zbl/?query-text=Fermat&query-math=%3Fa%5E%3Fn%20%2B%20%3Fb%5E%3Fn%3D%3Fc%5E%3Fn#1" 
+	height="800" width="1000"></iframe>
+	</section>
+
+	<section class="slide">
+	<h2>Math Web Search engine (MWS)</h2>
+	<p>The MathWebSearch system (MWS) is a content-based search engine for mathematical formulae. It indexes MathML formulae, using a technique derived from automated theorem proving: <span class="highlight">Substitution Tree Indexing</span>.</p>
+	<p>Developed by KWARC group in Jacobs University of Germany under the instruction of Prof. Michael Kohlhase</a></p>
+	<p>Unification-related algorithm (automated theorem proving)</p>
+	<h4>Reference</h4>
+<a href="https://github.com/KWARC/mws" target="_blank">
+https://github.com/KWARC/mws
+</a><br />
+<a href="https://github.com/KWARC/mws/issues/62" target="_blank">
+https://github.com/KWARC/mws/issues/62
+</a><br />
+<a href="https://kwarc.info/people/mkohlhase" target="_blank">
+https://kwarc.info/people/mkohlhase
+</a><br />
+<a href="http://link.springer.com/chapter/10.1007%2F3-540-59200-8_52" target="_blank">
+http://link.springer.com/chapter/10.1007%2F3-540-59200-8_52
+</a><br />
+	</section>
+
+	<section class="slide">
+	<h2>(uni)quation</h2>
+	<iframe style="border-style: solid; border-width: 5px;" src="
+http://uniquation.com/en/"
+	height="800" width="1000"></iframe>
+	</section>
+	
+	<section class="slide">
+	<h2>(uni)quation</h2>
+<blockquote>
+Nevertheless I don’t think that to opensource it now is a good idea because I’m sure that in the current state of the project I will fail to build a community. <br/>
+-- Denis Rystsov (Russia)
+</blockquote>
+	<p></p>
+	<h4>Reference</h4>
+	<p>
+<a href="http://uniquation.s3.amazonaws.com/info-en.html" target="_blank">
+http://uniquation.s3.amazonaws.com/info-en.html
+</a><br />
+<a href="http://rystsov.info/2009/05/01/uniquation.html" target="_blank">
+http://rystsov.info/2009/05/01/uniquation.html
+</a><br />
+</p>
+	</section>
+
+	<section class="slide">
+	<h2>Is the problem too Big?</h2>
+<ul>
+	<li><strike>you are inventing a new thing</strike></li>
+	<li>need a lot of work to build from ground up</li>
+	<li>a new model different from mainstream models</li>
+	<li>formula can have complex, various representation, matrix, hat, subscript...</li>
+	<li>ambiguity, parser needs to understand the math?</li>
+	<li>search efficiency</li>
+</ul>
+	</section>
+	
+	<section class="slide">
+	<h2>Demo system</h2>
+<a href="http://96.126.106.50/math-se/search.html" target="_blank">
+http://96.126.106.50/math-se/search.html
+</a><br />
+	<iframe style="border-style: solid; border-width: 5px;" src="
+http://96.126.106.50/math-se/search.html"
+	height="800" width="1000"></iframe>
+	</section>
+
+	<section class="slide">
+	<h2>Is the problem too Big?</h2>
+<ul>
+	<li><strike>you are inventing a new thing</strike></li>
+	<li><strike>need a lot of work to build from ground up</strike></li>
+	<li>a new model different from mainstream models</li>
+	<li>formula can have complex, various representation, matrix, hat, subscript...</li>
+	<li>ambiguity, parser needs to understand the math?</li>
+	<li>search efficiency</li>
+</ul>
+	</section>
+
+	<section class="slide">
+	<h2>Think out of the classical IR model</h2>
+	<h3>the problem</h3>
+<ul>
+	<li class="slide">[imath]a + b = b + c[/imath]</li>
+	<li class="slide">[imath]ax + (b + c) \not= (a+b)x +c[/imath]</li>
+	<li class="slide">symbols can have used interchangeably, e.g. [imath]\color{red}{a}^2 + \color{red}{b}^2 = \color{red}{c}^2[/imath] and [imath]\color{red}{x}^2 + \color{red}{y}^2 = \color{red}{z}^2[/imath]</li>
+	<li class="slide">same symbol in the same equation means something: [imath]\color{red}{p}(1-\color{red}{p})[/imath] and [imath]a(1-b)[/imath]</li>
+</ul>
+	<h3>the intuitive approach to solve</h3>
+<ul>
+	<li class="slide">Tree structure</li>
+	<li class="slide">Tokenization</li>
+	<li class="slide">Unification Algorithm or ?</li>
+</ul>
+	</section>
+
+<section class="slide">
+<h2>Tree construction</h2>
+<p>given math for formula in tex: </p>
+<pre>(a+\frac{b}{c})^n = d</pre>
+<p> which represents math formula:
+[dmath] (a+\frac{b}{c})^n = d [/dmath]
+Convert into a tree structure:
+</p>
+<img src="img/tree.png"/>
+</section>
+
+<section class="slide">
+<h2>Tree construction</h2>
+<h3>utilize LR(1) parser</h3>
+<pre class="brush: c; highlight: [1]; gutter: false">
+6  tex: tex '+' term
+9  tex: tex EQ_CLASS tex
+13 term: term DIV factor
+18 factor: factor script
+</pre>
+<img src="img/attach.png"/>
+
+<h3>in some cases, a node needs to pass its sons if two fathers are the same token:</h3>
+<img src="img/case.png"/>
+</section>
+
+<section class="slide">
+<h2>Compare two trees: bottom to up</h2>
+<p>what we call <span class="highlight">branch word...</span><p>
+<img src="img/branch.png" />
+<span class="h"> &nbsp;b </span>
+<span class="n"> &nbsp;/ </span>
+<span class="n"> &nbsp;+ </span>
+<span class="n"> &nbsp;^ </span>
+<span class="n"> &nbsp;= </span>
+<p>the symbol name here is for demonstration purpose, the real project will do tokenization.</p>
+<h3>the same idea is published before:</h3>
+<a href="https://github.com/t-k-/math-se/blob/master/doc/significant.pdf?raw=true" target="_blank">
+https://github.com/t-k-/math-se/blob/master/doc/significant.pdf?raw=true
+</a><br />
+</section>
+
+<section class="slide">
+<h2>Token weight in the tree</h2>
+<p>we assign weights to each token in the tree to distinguish:</p>
+<p>[dmath](a+a+a)\times(a+a+a)[/dmath] from [dmath](a+a)\times(a+a+a+a)[/dmath]</p>
+<img src="img/same_br.png"/>
+<p>so the previous example branch word will have weight:</p>
+<span>
+<span class="h"> &nbsp;b</span> (w=1)
+<span class="n"> &nbsp;/ </span>(w=3) 
+<span class="n"> &nbsp;+ </span>(w=5)
+<span class="n"> &nbsp;^ </span>(w=7)
+<span class="n"> &nbsp;= </span>(w=9)
+</span>
+</section>
+
+<section class="slide">
+<h2>Score and Ranking</h2>
+<h3>score between branch words</h3>
+<p>given two branch word:</p>
+<pre>\alpha 1-3-5-8-11-12-</pre>
+<p>and</p>
+<pre>\beta 2-3-5-7-9-</pre>
+<p>let [imath]m[/imath] be the number of continuous matches from the begining of the branch word, [imath]n[/imath] be number of same branch word, [imath]l[/imath] be the length of branch word, [imath]b[/imath] be the boolean value indicating if two symbol matches literally:</p>
+<p>[dmath]
+s_{d,q} = \frac{\min(n_d, n_q)}{n_q} \cdot \frac{m + b + 1}{\max(l_d, l_q)} \\
+[/dmath]</p>
+<h3>score between formula</h3>
+<p>the mark-and-cross algorithm</p>
+<a href="https://github.com/t-k-/math-se/blob/master/doc/mark-and-cross-algorithm.py" target="_blank">
+https://github.com/t-k-/math-se/blob/master/doc/mark-and-cross-algorithm.py
+</a><br />
+<a href="https://github.com/t-k-/math-se/blob/master/doc/example/algorithm.png" target="_blank">
+https://github.com/t-k-/math-se/blob/master/doc/example/algorithm.png
+</a><br />
+</section>
+
+	<section class="slide">
+	<h2>Is the problem too Big?</h2>
+<ul>
+	<li><strike>you are inventing a new thing</strike></li>
+	<li><strike>need a lot of work to build from ground up</strike></li>
+	<li><strike>a new model different from mainstream models</strike></li>
+	<li>formula can have complex, various representation, matrix, hat, subscript...</li>
+	<li>ambiguity, parser needs to understand the math?</li>
+	<li>search efficiency</li>
+</ul>
+	</section>
+	
+	<section class="slide">
+	<h2>tokenization</h2>
+	<ul>
+<li>[imath]+[/imath][imath]\oplus[/imath][imath]\pm[/imath][imath]\mp[/imath] and 
+[imath]-[/imath][imath]\setminus[/imath][imath]\lnot \qquad[/imath] <span class="highlight">add and minus</span></li>
+<li>[imath]()[/imath][imath]\left[\right][/imath][imath]\left\{\right\}[/imath][imath]\left<\right> \qquad[/imath] <span class="highlight">left/right class</span></li>
+<li>[imath]\sim \approx \simeq \cong \dot= \equiv \propto \ge \gt \notin \neq \subset \supset \qquad[/imath] <span class="highlight">equal class</span></li>
+<li>[imath], \; | : \nmid \forall \exists \And \atop \leftarrow \rightarrow \gets \to \Leftarrow \qquad[/imath]  <span class="highlight">separation class</span></li>
+<li>[imath]\int \iint \iiint \iiiint \idotsint \intop \prod \oint \bigvee \bigotimes \bigwedge \sum \lim \coprod \bigsqcup \sup \inf \qquad[/imath]  <span class="highlight"> sum class</span></li>
+<li>[imath]\exp \min \max \sin \cos \tan \sec \csc \arcsin \sinh \ker \deg \log \ln \lg \gcd \det \dim \qquad[/imath]  <span class="highlight">function class</span></li>
+<li>[0-9]+\.?[0-9]*   <span class="highlight">constant class</span></li>
+<li>[imath]\Pi \alpha \beta \gamma \eta \zeta \kappa \mu \nu \xi \phi \omicron \rho \phi \psi \omega \qquad[/imath]  <span class="highlight">variable class</span></li>
+<li>[imath]\pi[/imath]</li>
+<li>[imath]\infty[/imath]</li>
+<li>[imath]\emptyset[/imath]</li>
+<li>[imath]\perp[/imath]</li>
+<li>[imath]\ldots [/imath]</li>
+	</ul>
+	</section>
+
+	<section class="slide">
+<h2>Tokenization using flex</h2>
+<pre class="brush: c">
+"!"             { return yytext[0]; }
+"+"|"-"|"_"|"^" { return yytext[0]; }
+"("|"\\{"       { return '('; }
+")"|"\\}"       { return ')'; }
+"|"|"\|"        { 
+                 int save = abs_toggle;
+                 abs_toggle = !abs_toggle;
+                 if (save)
+                 	return ABS_R; 
+                 else
+                 	return ABS_L; 
+                }
+
+\\neg           { return NEG; }
+
+=               { mkstr(yytext); return EQ_CLASS; }
+\\ge            { mkstr(yytext); return EQ_CLASS; }
+\\not("="|"\equiv"|"\in") { mkstr(yytext); return EQ_CLASS; }
+...
+\\sum           { mkstr(yytext); return SUM_CLASS; }
+\\int           { mkstr(yytext); return SUM_CLASS; }
+...
+\\times         { mkstr(yytext); return TIMES; }
+\\cdot          { mkstr(yytext); return TIMES; }
+
+\\frac          { mkstr(yytext); return FRAC; }
+\\dfrac         { mkstr(yytext); return FRAC; }
+
+\\sqrt          { mkstr(yytext); return SQRT; }
+
+\/              { mkstr(yytext); return DIV; }
+\\div           { mkstr(yytext); return DIV; }
+
+[a-zA-Z_]'*     { mkstr(yytext); return VAR; }
+[0-9]+\.?[0-9]* { mkstr(yytext); return VAR; } 
+\\[Tt]heta      { mkstr(yytext); return VAR; } 
+...
+
+[ \t]+          {}
+\\[a-zA-Z]+     {/* omit undefined control sequence */}
+.               {}
+%%
+
+</pre>
+	</section>
+
+<section class="slide">
+<h2>complex to simple</h2>
+<h3>Handle subscript, supper script and unrecognized command</h3>
+<p>[imath]\hat a^2 _i[/imath]</p>
+<img src="img/handle_script.png"/>
+<h3>Handle Matrix</h3>
+<p>[imath]\left[
+\begin{matrix}
+a & b\\
+c & d
+\end{matrix}
+\right][/imath]</p>
+<img src="img/tab.png"/>
+</section>
+
+<section class="slide">
+<h2>Syntax reduce using bison</h2>
+<pre class="brush: c">
+    0 $accept: doc $end
+
+    1 doc: %empty
+    2    | doc query
+
+    3 query: tex '\n'
+    4      | '\n'
+
+    5 tex: term
+    6    | tex '+' term
+    7    | tex '-' term
+    8    | '-' tex
+    9    | tex EQ_CLASS tex
+
+   10 term: factor
+   11     | term factor
+   12     | term TIMES factor
+   13     | term DIV factor
+
+   14 body: '{' tex '}'
+   15     | '(' tex ')'
+   16     | VAR
+
+   17 factor: body
+   18       | factor script
+   19       | ABS_L tex ABS_R
+   20       | FRAC '{' tex '}' '{' tex '}'
+   21       | SUM_CLASS body
+   22       | SUM_CLASS script body
+   23       | body '!'
+   24       | SQRT '[' tex ']' body
+   25       | SQRT body
+
+   26 script: '_' VAR
+   27       | '_' VAR '^' VAR
+   28       | '_' VAR '^' '{' tex '}'
+   29       | '^' VAR '_' '{' tex '}'
+   30       | '^' VAR
+   31       | '^' VAR '_' VAR
+   32       | '^' '{' tex '}'
+   33       | '^' '{' tex '}' '_' VAR
+   34       | '^' '{' tex '}' '_' '{' tex '}'
+   35       | '_' '{' tex '}'
+   36       | '_' '{' tex '}' '^' VAR
+   37       | '_' '{' tex '}' '^' '{' tex '}'
+</pre>
+</section>
+
+	<section class="slide">
+	<h2>Is the problem too Big?</h2>
+<ul>
+	<li><strike>you are inventing a new thing</strike></li>
+	<li><strike>need a lot of work to build from ground up</strike></li>
+	<li><strike>a new model different from mainstream models</strike></li>
+	<li><strike>formula can have complex, various representation, matrix, hat, subscript...</strike></li>
+	<li>ambiguity, parser needs to understand the math?</li>
+	<li>search efficiency</li>
+</ul>
+	</section>
+
+	<section class="slide">
+	<h2>Ambiguity</h2>
+<ul>
+	<li class="slide"><h3>defined function</h3>
+		<ul>
+		<li>[imath]\sin(x)[/imath]</li>
+		<li>[imath]sin(x)[/imath]</li>
+		</ul>
+	</li>
+	<li class="slide"><h3>self-defined function</h3>
+		<ul>
+		<li>[imath]f(x)[/imath]</li>
+		<li>[imath]f(a+b)[/imath]</li>
+		<li>[imath]f(a, b)[/imath]</li>
+		</ul>
+	</li>
+	<li class="slide"><h3>grouping</h3>
+		<ul>
+		<li>[imath]\displaystyle\int f(x) \dfrac{\mathrm{d}x}{\sin x}[/imath]</li>
+		<li>[imath]\sin 2 \pi[/imath]</li>
+		<li>[imath]\{ x | a \left| \frac{1}{x} \right| > b \}[/imath]</li>
+		</ul>
+	</li>
+</ul>
+	</section>
+
+	<section class="slide">
+	<h2>Is the problem too Big?</h2>
+<ul>
+	<li><strike>you are inventing a new thing</strike></li>
+	<li><strike>need a lot of work to build from ground up</strike></li>
+	<li><strike>a new model different from mainstream models</strike></li>
+	<li><strike>formula can have complex, various representation, matrix, hat, subscript...</strike></li>
+	<li><strike>ambiguity, parser needs to understand the math?</strike> (for documents write in standard way)</li>
+	<li>search efficiency</li>
+</ul>
+	</section>
+
+<section class="slide">
+<h2>Efficiency consideration</h2>
+<h3>Search similar branch word: file system</h3>
+<p> document
+<span class="h"> &nbsp;b</span> (w=1)
+<span class="n"> &nbsp;/ </span>(w=3) 
+<span class="n"> &nbsp;+ </span>(w=5)
+<span class="n"> &nbsp;^ </span>(w=7)
+<span class="n"> &nbsp;= </span>(w=9)
+</p>
+<p>store it in the directory: <span class="highlight"><u>./collection/var/frac/add</u>/sus/eq_class</span></p>
+<p> query 
+<span class="h"> &nbsp;y </span>
+<span class="n"> &nbsp;/ </span>
+<span class="n"> &nbsp;+ </span>, 
+ will go into the directory: <span class="highlight">./collection/var/frac/add</span> and search all all the branch words under sub-directories.</p>
+<h3>Document key-value database: tokyo-cabinet DB</h3>
+<p>Given a document ID, get the document information from disk.</p>
+<h3>In memory key-value database: Redis</h3>
+<p>Given a document ID, get the document score table in memory. </p>
+</section>
+
+	<section class="slide">
+	<h2>Thank You!</h2>
+	<h3>What's next?</h3>
+<ol>
+	<li>tune the parser and enable it to parse as many as collection</li>
+	<li>allow concurrence search</li>
+	<li>improve the safety of CGI program</li>
+</ol>
+	<h3>Links</h3>
+	<table border="0"><tr>
+	<td width="100"><iframe src="http://ghbtns.com/github-btn.html?user=t-k-&repo=math-se&type=watch&size=large" height="30" style="display:inline; height:30px"></iframe></td>
+	<td>https://github.com/t-k-/math-se</td>
+	</tr></table>
+	<table border="0"><tr>
+	<td width="100"><img src="img/slide.png"/></td>
+	<td>http://www.eecis.udel.edu/~zhongwei</td>
+	</tr></table>
+	<table border="0"><tr>
+	<td width="100"><img src="img/demo.jpg"/></td>
+	<td>http://96.126.106.50/math-se/search.html</td>
+	</tr></table>
+	<h3>Contact</h3>
+	<p>zhongwei@udel.edu</p>
+	</section>
+
+	
+
+
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+      <span class="deck-status-current"></span>
+      /
+      <span class="deck-status-total"></span>
+    </p>
+
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+      <label for="goto-slide">Go to slide:</label>
+      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+      <datalist id="goto-datalist">1</datalist>
+      <input type="submit" value="Go">
+    </form>
+
+    <!-- End extension snippets. -->
+  </div>
+
+<!-- Required JS files. -->
+<script src="jquery.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/goto/deck.goto.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  $(function() {
+    $.deck('.slide');
+  });
+</script>
+</body>
+</html>

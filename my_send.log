@@ -1,0 +1,40 @@
+SMTP -> FROM SERVER:220 126.com Anti-spam GT for Coremail System (126com[20140526])
+
+<br />SMTP -> FROM SERVER: 250-mail
+250-PIPELINING
+250-AUTH LOGIN PLAIN
+250-AUTH=LOGIN PLAIN
+250-coremail 1Uxr2xKj7kG0xkI17xGrU7I0s8FY2U3Uj8Cz28x1UUUUU7Ic2I0Y2UF1hBnPUCa0xDrUUUUj
+250-STARTTLS
+250 8BITMIME
+
+<br />SMTP -> FROM SERVER:250 Mail OK
+
+<br />SMTP -> FROM SERVER:250 Mail OK
+
+<br />SMTP -> FROM SERVER:354 End data with <CR><LF>.<CR><LF>
+
+<br />SMTP -> FROM SERVER:250 Mail OK queued as smtp7,DsmowACnl79zHwpVnCJ6AA--.12859S2 1426726775
+
+<br />
+--------- bedreamer@163.com ---------- END.
+SMTP -> FROM SERVER:220 126.com Anti-spam GT for Coremail System (126com[20140526])
+
+<br />SMTP -> FROM SERVER: 250-mail
+250-PIPELINING
+250-AUTH LOGIN PLAIN
+250-AUTH=LOGIN PLAIN
+250-coremail 1Uxr2xKj7kG0xkI17xGrU7I0s8FY2U3Uj8Cz28x1UUUUU7Ic2I0Y2Ury4f6-UCa0xDrUUUUj
+250-STARTTLS
+250 8BITMIME
+
+<br />SMTP -> FROM SERVER:250 Mail OK
+
+<br />SMTP -> FROM SERVER:250 Mail OK
+
+<br />SMTP -> FROM SERVER:354 End data with <CR><LF>.<CR><LF>
+
+<br />SMTP -> FROM SERVER:250 Mail OK queued as smtp7,DsmowADXe9U0IApVykd6AA--.1864S2 1426726967
+
+<br />
+--------- clock126@126.com ---------- END.

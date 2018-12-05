@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js – The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<link rel="stylesheet" href="tk/mermaid.min.css">
+		<script src="tk/mermaid.min.js"></script>
+		<script>
+        mermaid.initialize({startOnLoad:true});
+        </script>
+	</head>
+
+	<body>
+
+<div class="reveal">
+	<div class="slides">
+
+	<section>
+		<h3>Tangent-S at a glance</h3>
+		<p>
+			<small>Zhong Wei @ DPRL</small>
+		</p>
+	</section>
+
+<!--
+<section>
+    <h5>Illustrated by example...</h5>
+</section>
+-->
+
+<!--  Unification -->
+<section>
+    <section id="fragments">
+        <h2>\(\alpha\)-equivalence</h2>
+        <br/>
+        <br/>
+        <p>Query: \(\qquad  \color{orange}{y^2 + y }\)</p>
+        <br/>
+        <p>Case 1: \(\qquad \color{orange}{x^2 + x } + y^2 + x \) </p>
+       <br/>
+        <p>Matched by \(\alpha\)-equivalence</p>
+    </section>
+    <section>
+        <h2>\(\alpha\)-equivalence</h2>
+        <br/>
+        <br/>
+        <p>Query: \(\qquad  \color{orange}{y^2 + y }\)</p>
+        <br/>
+        <p>Case 2: \(\qquad  x^2 + x + \color{orange}{y^2 + x}\) </p>
+       <br/>
+        <p>Not Matched by \(\alpha\)-equivalence, </p>
+        <p>although includes an exact match</p>
+    </section>
+    </section>
+</section>
+
+<!--  Unification -->
+<section>
+    <section id="fragments">
+        Query: \(\quad   y^2 + y    \)
+        <br/> <br/>
+        <div class="mermaid"  height="30px">
+graph LR
+    y((y)) --- |above| 2((2))
+    y((y)) --- +((+))
+    +((+)) --- yy((y))
+style y fill:orange,stroke:#333,stroke-width:4px
+style 2 fill:green,stroke:#333,stroke-width:4px
+style + fill:green,stroke:#333,stroke-width:4px
+style yy fill:orange,stroke:#333,stroke-width:4px
+        </div>
+        <p>Aligning: (V!y, ) with (V!x, )</p>
+        <p>y always map to x, make account all these matches</p>
+    </section>
+    <section>
+        Doc: \(\quad  x^2 + x + y^2 + x \)
+        <br/> <br/>
+        <div class="mermaid">
+graph LR
+    x((x)) --- |above| 2((2))
+    x((x)) --- +((+))
+    +((+)) --- xx((x))
+    xx((x)) --- ++((+))
+    ++((+)) --- y((y))
+    y((y)) --- |above| 22((2))
+    y((y)) --- +++((+))
+    +++((+)) --- xxx((x))
+style x fill:orange,stroke:#333,stroke-width:4px
+style 2 fill:green,stroke:#333,stroke-width:4px
+style + fill:green,stroke:#333,stroke-width:4px
+style xx fill:orange,stroke:#333,stroke-width:4px
+        </div>
+        <p>Aligning: (V!y, ) with (V!x, )</p>
+        <p>y always map to x, make account all these matches</p>
+    </section>
+</section>
+
+
+<!--  Unification -->
+<section>
+    <section id="fragments">
+        Query: \(\quad   y^2 + y    \)
+        <br/> <br/>
+        <div class="mermaid"  height="30px">
+graph LR
+    y((y)) --- |above| 2((2))
+    y((y)) --- +((+))
+    +((+)) --- yy((y))
+style y fill:green,stroke:#333,stroke-width:4px
+style 2 fill:green,stroke:#333,stroke-width:4px
+style + fill:green,stroke:#333,stroke-width:4px
+style yy fill:orange,stroke:#333,stroke-width:4px
+        </div>
+        <p>Aligning: (V!y, ) with (V!x, )</p>
+        <p>y maps to x <b>and</b> y, choose the mapping occurs the most</p>
+    </section>
+    <section>
+        Doc: \(\quad  x^2 + x + y^2 + x \)
+        <br/> <br/>
+        <div class="mermaid">
+graph LR
+    x((x)) --- |above| 2((2))
+    x((x)) --- +((+))
+    +((+)) --- xx((x))
+    xx((x)) --- ++((+))
+    ++((+)) --- y((y))
+    y((y)) --- |above| 22((2))
+    y((y)) --- +++((+))
+    +++((+)) --- xxx((x))
+style y fill:green,stroke:#333,stroke-width:4px
+style 22 fill:green,stroke:#333,stroke-width:4px
+style +++ fill:green,stroke:#333,stroke-width:4px
+style xxx fill:orange,stroke:#333,stroke-width:4px
+        </div>
+        <p>Aligning: (V!y, ) with (V!x, )</p>
+        <p>y maps to x <b>and</b> y, choose the mapping occurs the most</p>
+    </section>
+</section>
+
+<!--  Unification -->
+<section>
+    <section id="fragments">
+        Query: \(\quad   y^2 + y    \)
+        <br/> <br/>
+        <div class="mermaid"  height="30px">
+graph LR
+    y((y)) --- |above| 2((2))
+    y((y)) --- +((+))
+    +((+)) --- yy((y))
+style y fill:green,stroke:#333,stroke-width:4px
+style 2 fill:green,stroke:#333,stroke-width:4px
+style + fill:green,stroke:#333,stroke-width:4px
+        </div>
+        <p>Aligning: (V!y, ) with (V!x, )</p>
+        <p>cut off the other mappings</p>
+    </section>
+    <section>
+        Doc: \(\quad  x^2 + x + y^2 + x \)
+        <br/> <br/>
+        <div class="mermaid">
+graph LR
+    x((x)) --- |above| 2((2))
+    x((x)) --- +((+))
+    +((+)) --- xx((x))
+    xx((x)) --- ++((+))
+    ++((+)) --- y((y))
+    y((y)) --- |above| 22((2))
+    y((y)) --- +++((+))
+    +++((+)) --- xxx((x))
+style y fill:green,stroke:#333,stroke-width:4px
+style 22 fill:green,stroke:#333,stroke-width:4px
+style +++ fill:green,stroke:#333,stroke-width:4px
+        </div>
+        <p>Aligning: (V!y, ) with (V!x, )</p>
+        <p>cut off the other mappings</p>
+    </section>
+</section>
+
+<!--  Wildcard -->
+<section>
+    <section id="fragments">
+        <h2>Wildcard</h2>
+        <br/>
+        <div class="mermaid">
+graph LR
+    1((?1)) --- |matching|x[a + b]
+   11((?1)) --- |discarded|xx[x y]
+    2((?2)) --- |matching|y[x y]
+style 1 fill:red,stroke:#333,stroke-width:4px
+style 2 fill:red,stroke:#333,stroke-width:4px
+        </div>
+        <p>In terms of \(\alpha\)-equivalence, Tangent chooses the map who has the max size of matched subtree</p>
+    </section>
+    <section>
+        <h2>Wildcard expansion (SLT)</h2>
+        <br/>
+        <ul>
+       <li> case 1: \(\quad \color{red}{\text{?1}} \quad\) matching \(\quad \color{red}{a + b + \dfrac x y}\) </li>
+       <li> case 2: \(\quad \color{red}{\text{?1}}^2 \quad\) not matching \(\quad {a + b + \dfrac x y}\) </li>
+       <li> case 3: \(\quad \color{red}{\text{?1}} \quad\) matching \(\quad \color{red}{a^2 + b + \dfrac x y}\) </li>
+       <li> case 4: \(\quad \color{red}{\text{?1}}^2 \quad\) matching \(\quad \color{red}a^2 + b + \dfrac x y\) </li>
+       </ul>
+       <br/>
+       <br/>
+        <p>Aligning: (\(\color{red}{\text{?1}}\), )  with (V!a, )</p>
+    </section>
+</section>
+
+<!--  Wildcard -->
+<section>
+    <section>
+        <h2>Wildcard expansion (SLT)</h2>
+        <br/>
+        <p>In case 1 and 3, we say wildcard is <i>horizontally expandable</i></p>
+       <br/>
+        <p>But it may stop expanding when the next node of query is the same or
+        unifiable with the next expanding node</p>
+        <ul>
+       <li> case 1: \(\quad \color{red}{\text{?1}} + ... \quad\) matching \(\quad \color{red}{a} + b + \dfrac x y\) </li>
+       <li> case 3: \(\quad \color{red}{\text{?1}} + ... \quad\) matching \(\quad \color{red}{a^2} + b + \dfrac x y\) </li>
+       </ul>
+    </section>
+    <section>
+        <h2>Wildcard expansion (OPT)</h2>
+        <br/>
+        <p>In OPT case, wildcard expansion is simply matching the entire subtree</p>
+        <div class="mermaid">
+graph LR
+    1((?1)) --- |matching|+((+))
+    + --- a((a))
+    + --- b((b))
+    2((?2)) --- |matching|*((*))
+    * --- x((x))
+    * --- y((y))
+style 1 fill:red,stroke:#333,stroke-width:4px
+style 2 fill:red,stroke:#333,stroke-width:4px
+        </div>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h2>Possible improvements</h2>
+        <br/>
+        <ul>
+        <br/>
+        <li>1. To extend alignment algorithm beyond top-K,
+        OPT permutation complexity is not acceptable. (OPT handles commutative
+        nodes well when search from leaf to root)</li>
+        <br/>
+        <li>2. SLT Wildcard greedy \(\alpha\)-equivalence may cause unexpected result.</li>
+        <br/>
+        <li>3. Core engine is not doing unified match.</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Possible improvements</h2>
+    </section>
+</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/math/math.js', async: true } // mathjax / MathJaX plugin.
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
