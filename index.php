@@ -129,7 +129,7 @@ MathJax.Hub.Config({
 		displayMath: [['[dmath]','[/dmath]']]
 	},
 
-	showMathMenu: false, /* do not show menu */
+	showMathMenu: true,
 
 	/* all I want is to disable fast-preview */
 	// CHTMLpreview: false,
