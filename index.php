@@ -168,15 +168,15 @@ echoAbout();
 //echoAD();
 //echoFriendsUrls();
 echoSearch();
-echo '<div id="reader_rank">';
-echoReaderRank();
-echo '</div>';
+// echo '<div id="reader_rank">';
+// echoReaderRank();
+// echo '</div>';
 echoTranslate();
 echoBlogArchives();
 echoTags();
-echo '<div id="recent_comments" style="font: normal 12px sans-serif;">';
-echoRecentComments(); 
-echo '</div>';
+// echo '<div id="recent_comments" style="font: normal 12px sans-serif;">';
+// echoRecentComments(); 
+// echo '</div>';
 //echoStatistic();
 ?>
 </div>

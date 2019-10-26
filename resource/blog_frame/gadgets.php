@@ -64,15 +64,15 @@ function echoAbout()
 {
 	echoColumnTitle('<img style="margin-bottom: -10px;padding-right: 20px;" src="resource/icon/icon.jpeg"/> tk 的博客', true);
 	echo '<span class="main_font">';
-//	echo '<br/>联系方式:';
-//	echo '<br/>';
-//	
-//	echo '<img class="icon" src="resource/icon/mail.png"/>&nbsp;&nbsp;<img src="resource/icon/email_addr.png"/>'
-//	.'<br/>';
+	//echo '<br/>联系方式:';
+	echo '<br/>';
+	
+	echo '<img class="icon" src="resource/icon/mail.png"/>&nbsp;&nbsp;<img src="resource/icon/email_addr.png"/>'
+	.'<br/>';
 	echo '<br/>';
 	echo '<img class="icon" src="resource/icon/github.png"/>&nbsp;&nbsp;请有空常来 <a href="https://github.com/t-k-/" target="_Blank">Github </a> 探望我。'
-	.'<br/><br/>';
-	echo '<img class="icon" src="resource/icon/vi_icon.png"/>&nbsp;&nbsp;如果你是 Chrome 用户，欢迎试用<br/>我的英语阅读插件<a href="https://chrome.google.com/webstore/detail/voice-instead/kphdioekpiaekpmlkhpaicehepbkccbf/" target="_Blank"> VI</a>。';
+	.'<br/>';
+//	echo '<img class="icon" src="resource/icon/vi_icon.png"/>&nbsp;&nbsp;如果你是 Chrome 用户，欢迎试用<br/>我的英语阅读插件<a href="https://chrome.google.com/webstore/detail/voice-instead/kphdioekpiaekpmlkhpaicehepbkccbf/" target="_Blank"> VI</a>。';
 	
 	echo '</span>';
 }
@@ -211,15 +211,17 @@ function echoTranslate()
 
 function echoSearch()
 {
-	echoColumnTitle('站内搜索');
+	//echoColumnTitle('站内搜索');
+	echo '<br/>';
 	echo '
 	<form action="search.php" class="mysearch" method="get" target="_blank">
 	<div style="padding-top: 10px;">
-	  <input type="text" name="q" placeholder="搜索...">
 	  <button type="submit"></button>
+	  <input type="text" name="q" placeholder="站内搜索...">
 	</div>
 	</form>
 	';
+	echo '<br/>';
 }
 
 function echoReaderRank()

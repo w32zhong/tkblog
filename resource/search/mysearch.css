@@ -14,7 +14,6 @@ width: 25px;
 height: 25px;
 border: 0;
 cursor: pointer;
-right: 20px;
 position:relative;
 }
 .mysearch input[type="submit"], button[type="text"] {
