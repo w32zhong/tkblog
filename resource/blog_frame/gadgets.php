@@ -245,7 +245,7 @@ function echoReaderRank()
 		else
 			$name_url = '<a href="http://'.$url.'" title="访问他/她的主页" target="_Blank">'.$name."</a>";
 
-		$img = '<div class="comment_image"><img src="https://gravatar.com/avatar/'.$email_md5.'?s=32&d=wavatar"/></div>';
+		$img = '<div class="comment_image"><img src="resource/icon/default-gravatar32.jpg"/></div>';
 		
 		echo '<div style="height:40px">';
 		echo "${img}${name_url} (${comments})";

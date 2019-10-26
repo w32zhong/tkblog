@@ -155,7 +155,7 @@ function echoBlogLeavingCommentTop($id)
 	echo '<div id="leave_comment_top_id'.$id. '" class="hide comment">';
 		echo '<div class="blog_comments">';
 			echo '<div class="comment_image preview_image">';
-			echo '<img id="preview_img_id'.$id. '" onclick="gravatarHint('.$id. ')" title="本站根据您填写的电子邮件生成头像，您也可以注册gravatar拥有属于自己的全球通用头像。" src="https://gravatar.com/avatar/?d=mm&s=32"/>';
+			echo '<img id="preview_img_id'.$id. '" onclick="gravatarHint('.$id. ')" title="本站根据您填写的电子邮件生成头像，您也可以注册gravatar拥有属于自己的全球通用头像。" src="resource/icon/default-gravatar32.jpg"/>';
 			echo '</div>';
 			
 			echo '&nbsp;(评论预览)';
