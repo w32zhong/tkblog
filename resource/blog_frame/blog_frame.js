@@ -278,10 +278,14 @@ function updateFixedBar()
 	var joey = document.getElementById('left_column_top');
 	var walle = document.getElementById('left_column_bottom');
 
+	var offset = $("div.left_column").offset().left;
 	if(GetDocumentScrollOffset() > getAbsPos(joey) + joey.offsetHeight)
 	{
 		walle.style.position = "fixed";
 		walle.style.top = "0px";
+		$(walle).css({
+			'left': offset - $(document).scrollLeft()
+		});
 	}
 	else
 	{

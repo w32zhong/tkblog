@@ -160,33 +160,33 @@ max-height:32px;
 <!--frame_init will load the initial posts-->
 <body onload="frame_init();">
 <div class="layout">
-<div class="left_column">
-<div id="left_column_top">
-<?php 
-echoAbout();
-//echoNotice();
-//echoAD();
-//echoFriendsUrls();
-echoSearch();
-// echo '<div id="reader_rank">';
-// echoReaderRank();
-// echo '</div>';
-echoTranslate();
-echoBlogArchives();
-echoTags();
-// echo '<div id="recent_comments" style="font: normal 12px sans-serif;">';
-// echoRecentComments(); 
-// echo '</div>';
-//echoStatistic();
-?>
-</div>
-<div id="left_column_bottom">
-<?php
-echoMusicPlayer();
-echoDonate();
-echoFeed();
-?>
-</div>
+	<div class="left_column">
+		<div id="left_column_top">
+		<?php 
+		echoAbout();
+		//echoNotice();
+		//echoAD();
+		//echoFriendsUrls();
+		echoSearch();
+		// echo '<div id="reader_rank">';
+		// echoReaderRank();
+		// echo '</div>';
+		echoTranslate();
+		echoBlogArchives();
+		echoTags();
+		// echo '<div id="recent_comments" style="font: normal 12px sans-serif;">';
+		// echoRecentComments(); 
+		// echo '</div>';
+		//echoStatistic();
+		?>
+		</div>
+	<div id="left_column_bottom">
+	<?php
+	echoMusicPlayer();
+	echoDonate();
+	echoFeed();
+	?>
+	</div>
 </div>
 
 <div class="right_column">

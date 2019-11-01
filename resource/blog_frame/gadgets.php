@@ -216,7 +216,7 @@ function echoSearch()
 	echo '
 	<form action="search.php" class="mysearch" method="get" target="_blank">
 	<div style="padding-top: 10px;">
-	  <button type="submit"></button>
+	  <button type="submit" style="left: 0px"></button>
 	  <input type="text" name="q" placeholder="站内搜索...">
 	</div>
 	</form>
