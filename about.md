@@ -1,4 +1,6 @@
 ## Wei Zhong (钟 威)
+E-mail: wxz8033@rit.edu
+
 Github: [https://github.com/t-k-](https://github.com/t-k-)
 
 ### Education Summary 
@@ -10,9 +12,10 @@ My interests is primarily in math-aware search engine or mathematical informatio
 I received my Master degree in Electrical and Computer Engineering (advised by Professor [Fang Hui](https://www.eecis.udel.edu/~hfang/)) from University of Delaware,
 and B.S. degree from Jiliang University of China, in 2015 and 2013 respectively.
 
-I am currently looking for an internship or fulltime job, please contact me via E-mail: wxz8033@rit.edu
-
 ### Publications
+* \[ [zhong2020efficiency](https://ecir2020.org/accepted-papers/) \] Zhong, W., Rohatgi, S., Wu, J., Giles, C.L., and Zanibbi, R. (2020) Accelerating Substructure Similarity Search for Formula Retrieval. Proc. European Conference on Information Retrieval, to appear.
+* \[ [zhong2020interface](https://ecir2020.org/accepted-papers/) \] Nishizawa, G., Liu, J., Diaz, Y., Dmello, A., Zhong, W. and Zanibbi, R. (2020) MathSeer: A Math-Aware Search Interface with Intuitive Formula Editing, Reuse, and Lookup.  Proc. European Conference on Information Retrieval, to appear.
+* \[ [zhong2019similarity](https://www.cs.rit.edu/~dprl/assets/files/Approach0_ECIR2019.pdf) \] Zhong, W. and Zanibbi, R. (2019) Structural Similarity Search for Formulas using Leaf-Root Paths in Operator Subtrees. Proc. European Conference on Information Retrieval, Cologne, Germany. (**Best Applications Paper Award**)
 * \[ [zhong2016opmes](https://link.springer.com/chapter/10.1007/978-3-319-30671-1_79) \] Zhong, Wei and Fang, Hui "OPMES: A Similarity Search Engine for Mathematical Content", European Conference on Information Retrieval (2016)
 * \[ [mastersthesis](http://udspace.udel.edu/handle/19716/17656) \] Zhong, Wei and Fang, Hui "A novel similarity-search method for mathematical content in LaTeX markup and its implementation" (2015)
 
