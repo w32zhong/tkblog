@@ -1,5 +1,5 @@
 <?php 
-$host_name = 'localhost';
+$host_name = '127.0.0.1';
 $usr_name = 'thoughts_ga6840';
 $password = 'xxxxxxxxxxxxx';
 $database = 'thoughts_ga6840';
