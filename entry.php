@@ -30,6 +30,7 @@
 <script language="javascript" src="plugin/syntaxhighlighter/scripts/shBrushPerl.js"></script>
 <script language="javascript" src="plugin/syntaxhighlighter/scripts/shBrushDiff.js"></script>
 <script language="javascript" src="plugin/syntaxhighlighter/scripts/shBrushLua.js"></script>
+<script language="javascript" src="plugin/syntaxhighlighter/scripts/shBrushGo.js"></script>
 
 <!-- mermaid.js -->
 <script src="plugin/mermaid/mermaid.min.js"></script>

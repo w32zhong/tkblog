@@ -195,6 +195,7 @@ vhdl        vhdl
 perl        perl, Perl, pl
 diff        diff, patch
 lua         lua
+go          go
 </pre>
 <br/>
 <?php
