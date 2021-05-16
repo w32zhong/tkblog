@@ -20,14 +20,14 @@ function handleMoreBlogs($type_value, $msg_value, $pace=9)
 	$keyword_filter = $agr_arr['keyword_filter'];
 
 	//if not safe, make it safe
-	if(!get_magic_quotes_gpc())
-	{
-		$from = addslashes($from);
-		$id_filter = addslashes($id_filter);
-		$tag_filter = addslashes($tag_filter);
-		$time_filter = addslashes($time_filter);
-		$keyword_filter = addslashes($keyword_filter);
-	}
+	//if(!get_magic_quotes_gpc())
+	//{
+	//	$from = addslashes($from);
+	//	$id_filter = addslashes($id_filter);
+	//	$tag_filter = addslashes($tag_filter);
+	//	$time_filter = addslashes($time_filter);
+	//	$keyword_filter = addslashes($keyword_filter);
+	//}
 
 	$res = dbGetBlogsByFilters($id_filter, $tag_filter, $time_filter, 
 			$keyword_filter, $from, $pace + 1);
@@ -67,10 +67,10 @@ function handleMoreBlogContent($type_value, $msg_value)
 	$agr_arr = phraseFileHead($msg_value);
 	$id = $agr_arr['id'];
 
-	if(!get_magic_quotes_gpc())
-	{
-		$id = addslashes($id);
-	}
+	//if(!get_magic_quotes_gpc())
+	//{
+	//	$id = addslashes($id);
+	//}
 
 	$blog = dbGetBlogByID($id);
 	$blog_more_content = '';

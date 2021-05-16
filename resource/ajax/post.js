@@ -58,6 +58,7 @@ function showResponseXML()
 
 function getResponseTagArray( tagName )
 {
+	console.log(hXMLHTTP)
 	return hXMLHTTP.responseXML.getElementsByTagName(tagName);
 }
 
