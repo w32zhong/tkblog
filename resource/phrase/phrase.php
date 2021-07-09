@@ -360,11 +360,11 @@ function ReplaceSelfDefTags_kbd($text)
 function photo_html_tag($img_path)
 {
 	error_reporting(E_ERROR | E_PARSE);// turn off warnings
-	$img_size = getimagesize($img_path);
+	$img_size = getimagesize($img_path) ?: array(0, 0);
 	error_reporting(E_ERROR | E_WARNING | E_PARSE);// turn on warnings again
 
 	if ($img_size[0] == 0)
-		$img_size = getimagesize("../../".$img_path);
+		$img_size = getimagesize("../../".$img_path) ?: array(0, 0);
 
 	//if greater than CSS img max-width, adjust it
 	if ($img_size[0] >= 630)
