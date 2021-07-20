@@ -39,10 +39,10 @@ function handleValueOfSubmit($type_value, $msg_value, $ua, $ip)
 	//fwrite($h_file, $content);
 	//fclose($h_file);
 
-	if(get_magic_quotes_gpc())
-	{
-		$content = stripslashes($content);
-	}
+	//if(get_magic_quotes_gpc())
+	//{
+	//	$content = stripslashes($content);
+	//}
 
 	//get max sub id of comments to to_id
 	$max_sub_id = dbGetMaxSubIDOfComments($to_id);

@@ -72,15 +72,15 @@ function dbInit($ifDropTable = false)
 
 function dbInsertComment($arr,$content_arr)
 {
-	if (!get_magic_quotes_gpc())
-	{
-		$safe_to_id = addslashes($arr[8]);
-		$safe_name = addslashes($content_arr['name']);
-		$safe_u_agent = addslashes($content_arr['u_agent']);
-		$safe_email = addslashes($content_arr['email']);
-		$safe_url =addslashes($content_arr['url']); 
-	}
-	else
+	//if (!get_magic_quotes_gpc())
+	//{
+	//	$safe_to_id = addslashes($arr[8]);
+	//	$safe_name = addslashes($content_arr['name']);
+	//	$safe_u_agent = addslashes($content_arr['u_agent']);
+	//	$safe_email = addslashes($content_arr['email']);
+	//	$safe_url =addslashes($content_arr['url']); 
+	//}
+	//else
 	{
 		$safe_to_id = $arr[8];
 		$safe_name = $content_arr['name'];
