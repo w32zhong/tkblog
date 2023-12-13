@@ -534,7 +534,8 @@ function useNonBreakingHyphen($content)
 		if($i % 2 == 0)
 		{
 			//using the non-breaking hyphen:
-			$tmp_str = str_replace("-","&#8209;", $content_piece);
+			#$tmp_str = str_replace("-", "&#8209;", $content_piece);
+			$tmp_str = $content_piece;
 
 			//do not use the HTML space, it won't break lines
 			//$res_content .= str_replace(" ","&nbsp;",$tmp_str);
